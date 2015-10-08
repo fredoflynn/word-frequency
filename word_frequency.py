@@ -9,6 +9,25 @@ def word_frequency(text):
     common_words = Counter(stripped_text)
     return common_words
 
+def max_reduced_to_50(count_dict):
+    """Takes a dictionary with counts as values, and returns a dict with a max
+    key value count of 50, and each count reduced at the same percentage and
+    rounded. If the max count < 50, it returns the same dict. It's probably
+    needlessly complex, but I'm tired"""
+    values_list = []
+    multiplier = float()
+    for count in count_dict.values():
+        values_list.append(count)
+    max_count = max(values_list)
+    print(max_count * 10)
+    if max_count < 51:
+        return count_dict
+    else:
+        multiplier = max_count / 50
+        print(multiplier)
+        for word in count_dict:
+            count_dict[word] = round(count_dict[word] / multiplier)
+        return count_dict
 
 if __name__ == '__main__':
     ignore_words_list = "a,able,about,across,after,all,almost,also,am,among,an,"\
@@ -29,8 +48,9 @@ if __name__ == '__main__':
     for word in ignore_words_list:
         del common_words[word]
 
+    #calls max_reduced_to_50 to check if counts should be reduced
     #uses Counter.most_common method to find the 20 most commons words
-    most_common = common_words.most_common(20)
+    max_fifty = max_reduced_to_50(common_words).most_common(20)
 
-    for count, word in most_common:
-        print(word, count)
+    for word, count in max_fifty:
+        print(word, "#" * count)

@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     #calls max_reduced_to_50 to check if counts should be reduced
     #uses Counter.most_common method to find the 20 most commons words
-    max_fifty = max_reduced_to_50(common_words).most_common(20)
+    most_common = max_reduced_to_50(common_words).most_common(20)
 
-    for word, count in max_fifty:
-        print(word, "#" * count)
+    for word, count in most_common:
+        print(word.ljust(15, " "), "#" * count)
